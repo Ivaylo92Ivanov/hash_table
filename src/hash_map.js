@@ -59,7 +59,7 @@ export default class HashMap {
       for (let i=0; i<this.capacity; i++) { this.bucketArray.push({}) };
       console.log('--------------------------')
       oldBucketArray.forEach((mapNode) => {
-        // if node is not empty iterate over its key-value pairs and add them to a keyValuePairsFromNode array
+        // if mapNode is not empty iterate over its key-value pairs and add them to a keyValuePairsFromNode array
         if(Object.keys(mapNode).length>0) {
           let keyValuePairsFromNode = [];
           while (mapNode) {             
@@ -76,15 +76,25 @@ export default class HashMap {
       });
     };
 
-    this.get = () => {
-
-    }
+    this.get = (key) => {
+      for (let mapNode of this.bucketArray) {
+        // if mapNode is not empty iterate over its key-value pairs and check for equality
+        if(Object.keys(mapNode).length>0) {
+          while(mapNode) {
+            if(mapNode.key==key) return mapNode.value;
+            mapNode=mapNode.next;
+          };
+        };
+      };
+      // if key not in HashMap return null
+      return null;
+    };
     
-    this.has = () => {
+    this.has = (key) => {
 
     }
 
-    this.remove = () => {
+    this.remove = (key) => {
 
     }
 
@@ -95,9 +105,7 @@ export default class HashMap {
     this.clear = () => {
       this.bucketArray = [];
       for (let i=0; i<this.capacity; i++) { this.bucketArray.push({}) };
-      console.log(JSON.stringify(this.bucketArray))
-
-    }
+    };
 
     this.keys = () => {
 
