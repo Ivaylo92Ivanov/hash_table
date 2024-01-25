@@ -78,7 +78,7 @@ export default class HashMap {
 
     this.get = (key) => {
       for (let mapNode of this.bucketArray) {
-        // if mapNode is not empty iterate over its key-value pairs and check for equality
+        // if mapNode is not empty iterate over its key-value pairs and check for equality, to return value
         if(Object.keys(mapNode).length>0) {
           while(mapNode) {
             if(mapNode.key==key) return mapNode.value;
@@ -91,7 +91,17 @@ export default class HashMap {
     };
     
     this.has = (key) => {
-
+      for (let mapNode of this.bucketArray) {
+        // if mapNode is not empty iterate over its key-value pairs and check for equality, to return true
+        if(Object.keys(mapNode).length>0) {
+          while(mapNode) {
+            if(mapNode.key==key) return true;
+            mapNode=mapNode.next;
+          };
+        };
+      };
+      // if key not in HashMap return false
+      return false;
     }
 
     this.remove = (key) => {
