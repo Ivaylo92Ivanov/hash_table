@@ -126,7 +126,17 @@ export default class HashMap {
     };
 
     this.keys = () => {
-
+      let keysArray = [];
+      this.bucketArray.forEach((mapNode) => {
+        // if mapNode is not empty
+        if(Object.keys(mapNode).length>0) {
+          while(mapNode) {
+            keysArray.push(mapNode.key);
+            mapNode=mapNode.next;
+          };
+        };
+      });
+      return keysArray;
     }
 
     this.values = () => {
