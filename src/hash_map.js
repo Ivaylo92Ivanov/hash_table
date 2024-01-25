@@ -104,7 +104,34 @@ export default class HashMap {
   };
 
   remove(key) {
-    //asdad
+    for (let i=0; i<this.capacity; i++) {
+      // if mapNode is not empty iterate over its key-value pairs and check for equality, to delete node&return true
+      if(Object.keys(this.bucketArray[i]).length>0) {
+        let prevNode;
+        let mapNode = this.bucketArray[i];
+        while(mapNode) {
+          if(mapNode.key==key) {
+            if(!prevNode && !mapNode.next) {
+              console.log('first case')
+              this.bucketArray[i] = {};
+            } else if (!prevNode && mapNode.next) {
+              console.log('second case')
+              this.bucketArray[i] = mapNode.next;
+            } else {
+              console.log('third case')
+              prevNode.next = mapNode.next;
+            };
+            this.bucketArray.forEach(node => console.log(node));
+            return true;
+          };
+          prevNode=mapNode;
+          mapNode=mapNode.next;
+        };
+      };
+    };
+    this.bucketArray.forEach(node => console.log(node));
+    // if key not in HashMap return false
+    return false;
   };
 
   length() {
