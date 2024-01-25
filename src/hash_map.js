@@ -7,8 +7,6 @@ export default class HashMap {
     this.bucketArray = [];
     for (let i=0; i<this.capacity; i++) { this.bucketArray.push({}) };
 
-
-
     this.set = (key, value) => {
       const hashCode = hash(key);
       const bucketIdx = hashCode % this.capacity;
@@ -105,11 +103,21 @@ export default class HashMap {
     }
 
     this.remove = (key) => {
-
+      
     }
 
     this.length = () => {
-
+      let keyCount = 0;
+      this.bucketArray.forEach((mapNode) => {
+        // if mapNode is not empty
+        if(Object.keys(mapNode).length>0) {
+          while(mapNode) {
+            keyCount++;
+            mapNode=mapNode.next;
+          };
+        };
+      });
+      return keyCount;
     }
 
     this.clear = () => {
